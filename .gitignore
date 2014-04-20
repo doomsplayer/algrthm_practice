@@ -2,3 +2,5 @@
 /lib/
 /build/
 /rustpkg_db.json
+*.so
+*.rlib
