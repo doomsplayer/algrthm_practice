@@ -1,0 +1,19 @@
+[package]
+name = "algorithm_practice"
+version = "0.0.1"
+authors = [ "doomsplayer@gmail.com" ]
+
+[dependencies.matrixrs]
+git = "https://github.com/doomsplayer/matrixrs"
+
+[[lib]]
+name = "sort"
+path = "src/sort/lib.rs"
+
+[[bin]]
+name = "insertion_sort"
+path = "example/insertion_sort.rs"
+
+[[bin]]
+name = "dijkstra"
+path = "src/router/dijkstra.rs"
