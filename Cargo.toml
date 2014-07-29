@@ -17,3 +17,12 @@ path = "example/insertion_sort.rs"
 [[bin]]
 name = "dijkstra"
 path = "src/router/dijkstra.rs"
+
+[[bin]]
+name = "prioriryQueue"
+path = "example/priorityQueue.rs"
+
+
+[[bin]]
+name = "testGround"
+path = "example/test.rs"

@@ -1,0 +1,3 @@
+[submodule "src/matrixrs"]
+	path = src/matrixrs
+	url = https://github.com/doomsplayer/matrixrs
