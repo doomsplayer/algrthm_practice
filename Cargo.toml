@@ -17,11 +17,3 @@ path = "example/insertion_sort.rs"
 [[bin]]
 name = "testGround"
 path = "example/test.rs"
-
-[[bin]]
-name = "dijkstra"
-path = "src/router/dijkstra.rs"
-
-[[bin]]
-name = "asm_test"
-path = "example/test.rs"
