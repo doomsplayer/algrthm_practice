@@ -4,24 +4,15 @@ version = "0.0.1"
 authors = [ "doomsplayer@gmail.com" ]
 
 [dependencies.matrixrs]
-git = "https://github.com/doomsplayer/matrixrs"
+path = "src/matrixrs"
 
 [[lib]]
-name = "sort"
-path = "src/sort/lib.rs"
+name = "algorithm"
+path = "src/algrthm/lib.rs"
 
 [[bin]]
 name = "insertion_sort"
 path = "example/insertion_sort.rs"
-
-[[bin]]
-name = "dijkstra"
-path = "src/router/dijkstra.rs"
-
-[[bin]]
-name = "prioriryQueue"
-path = "example/priorityQueue.rs"
-
 
 [[bin]]
 name = "testGround"

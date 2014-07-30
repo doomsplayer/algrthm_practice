@@ -1,11 +1,9 @@
-extern crate sort;
+extern crate algorithm;
 extern crate time;
 use std::rand::random;
-use sort = sort::insertion_sort;
-use sort::{Desc,Insc};
+use algorithm::sort::{Desc,Insc};
+use algorithm::sort::insertion::sort;
 use time::get_time;
-
-
 
 fn main(){
 	let mut to_be_sort : Vec<u16> = Vec::new();

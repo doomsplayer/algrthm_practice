@@ -1,5 +1,8 @@
+#![feature(phase)]
+#[phase(plugin, link)] extern crate matrixrs;
 use std::collections::PriorityQueue;
 use std::uint;
+use matrixrs::{Matrix, ToMatrix};
 
 #[deriving(Eq, PartialEq)]
 struct State {
@@ -36,14 +39,14 @@ struct Edge {
 // to each node. This implementation isn't memory efficient as it may leave duplicate
 // nodes in the queue. It also uses `uint::MAX` as a sentinel value,
 // for a simpler implementation.
-fn shortest_path(adj_list: &Vec<Vec<Edge>>, start: uint, goal: uint) -> uint {
+fn shortest_path<T>(adj_list: &Matrix<T>, start: uint, goal: uint) -> uint {
     // dist[node] = current shortest distance from `start` to `node`
-    let mut dist = Vec::from_elem(adj_list.len(), uint::MAX);
+    let mut dist = Vec::from_elem(adj_list.nrow, uint::MAX);
 
     let mut pq = PriorityQueue::new();
 
     // We're at `start`, with a zero cost
-    *dist.get_mut(start) = 0u;
+    dist[start] = 0u;
     pq.push(State { cost: 0u, position: start });
 
     // Examine the frontier with lower cost nodes first (min-heap)
@@ -61,14 +64,14 @@ fn shortest_path(adj_list: &Vec<Vec<Edge>>, start: uint, goal: uint) -> uint {
 
         // For each node we can reach, see if we can find a way with
         // a lower cost going through this node
-        for edge in adj_list[position].iter() {
+        for edge in adj_list.row_vec(position).iter() {
             let next = State { cost: cost + edge.cost, position: edge.node };
 
             // If so, add it to the frontier and continue
             if next.cost < dist[next.position] {
                 pq.push(next);
                 // Relaxation, we have now found a better way
-                *dist.get_mut(next.position) = next.cost;
+                dist[next.position] = next.cost;
             }
         }
     }
@@ -99,21 +102,15 @@ fn main() {
     // The graph is represented as an adjecency list where each index,
     // corresponding to a node value, has a list of outgoing edges.
     // Chosen for it's efficiency.
-    let graph = vec![
-        // Node 0
-        vec![Edge { node: 2, cost: 10 },
-             Edge { node: 1, cost: 1 }],
-        // Node 1
-        vec![Edge { node: 3, cost: 2 }],
-        // Node 2
-        vec![Edge { node: 1, cost: 1 },
-             Edge { node: 3, cost: 3 },
-             Edge { node: 4, cost: 1 }],
-        // Node 3
-        vec![Edge { node: 0, cost: 7 },
-             Edge { node: 4, cost: 2 }],
-        // Node 4
-        vec![]];
+    let graph = 
+        matrix!(
+        0 1 10 0 0|
+        0 0  0 2 0|
+        0 1  0 3 1|
+        7 0  0 0 2|
+        0 0  0 0 0
+        );
+
 
     assert_eq!(shortest_path(&graph, 0, 1), 1);
     assert_eq!(shortest_path(&graph, 0, 3), 3);

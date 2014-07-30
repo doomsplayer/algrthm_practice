@@ -1,9 +1,12 @@
-enum Operation<T> {
-	Dcj(T,T),
-	Cnj(T,T),
-	Neg(T),
-	Eqv(T,T)
-}
+#![feature(asm)]
 fn main() {
-	
+	let a:i64;
+	unsafe {
+		asm!(
+			"pop $0"
+			:"=r"(a)
+			::"memory":
+			);
+	};
+	println!("{}",a);
 }
