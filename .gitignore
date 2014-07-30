@@ -5,3 +5,4 @@
 *.rlib
 /target
 /*.sublime-workspace
+test.rs
